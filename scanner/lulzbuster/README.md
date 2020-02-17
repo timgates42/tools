@@ -25,8 +25,8 @@ target options
 http options
 
   -h <type>      - http request type (default: GET) - ? to list types
-  -x <code>      - exclude http status codes (default: 404,503 - multi
-                   codes separated by ',')
+  -x <code>      - exclude http status codes (default: 400,404,500,501,502,503
+                   multi codes separated by ',')
   -f             - follow http redirects. hint: better try appending a '/'
                    with '-A' option first instead of using '-f'
   -F <num>       - num level to follow http redirects (default: 0)
@@ -60,11 +60,11 @@ other options
                    list supported schemes
   -P <creds>     - proxy auth credentials (format: <user>:<pass>)
   -i             - insecure mode (skips ssl/tls cert verification)
-  -S             - smart mode aka compare response sizes when wildcard was
-                   detected, etc. (use this if speed is not 1st priority!)
+  -S             - smart mode aka eliminate false-positives, more infos,
+                   etc. (use this if speed is not your 1st priority!)
   -n <str>       - nameservers (default: '1.1.1.1,8.8.8.8,208.67.222.222'
                    multi separated by '.')
-  -l <file>      - logfile for found valid urls (default: stdout)
+  -l <file>      - log found paths and valid urls to file
 
 misc
 
