@@ -35,7 +35,6 @@
 int main(int argc, char *argv[])
 {
   opts_T *opts;
-  wildcard_T wcard;
 
   /* prepare env shizzle */
   banner();
@@ -61,8 +60,8 @@ int main(int argc, char *argv[])
 
   /* tcp connection check before we continue */
   JSLOG("connection check\n");
-  wcard = check_conn_wildcard(opts->start_url);
-  if (wcard.conn_ok == FALSE) {
+  opts->wcard = check_conn_wildcard(opts->start_url);
+  if (opts->wcard.conn_ok == FALSE) {
     ESLOG("could not connect to: %s\n", opts->start_url);
     free_lulzbuster(opts);
     __GAME_OVER;
@@ -72,13 +71,11 @@ int main(int argc, char *argv[])
 
   /* check for wildcard HTTP-200 response */
   JSLOG("wildcard check (HTTP 200)\n");
-  if (wcard.resp_code == HTTP_OK) {
+  if (opts->wcard.resp_code == HTTP_OK) {
     WSLOG("wildcard response for ANY resource request\n");
   } else {
     GSLOG("lulz! no wildcard detected\n");
   }
-  /* we need wildcard data for attacks */
-  opts->wcard = wcard;
 
   /* set desired http options and show final options */
   if (set_http_options(opts) == FALSE) {
@@ -108,7 +105,7 @@ void free_lulzbuster(opts_T *opts)
   /* curl stuff here */
   cleanup_http(opts->curl);
 
-  /* free attack_urls items */
+  /* free attack_urls */
   if (opts->attack_urls != NULL) {
     for (tptr = opts->attack_urls; *tptr != NULL; ++tptr) {
       free(*tptr);

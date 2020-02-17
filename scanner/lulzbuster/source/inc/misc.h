@@ -62,7 +62,7 @@
 char **build_urls(const char *, char **, size_t, char **, size_t);
 
 /* read lines from file. kill <lastchar> with 0x00 if given */
-char **read_lines(const char *, size_t, const int);
+char **read_lines(const char *, size_t, size_t *, const int);
 
 /* count lines in a file. wc -l ;) */
 size_t count_lines(const char *);

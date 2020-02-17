@@ -60,6 +60,7 @@ error_T error[] = {
   { E_TCP_CONNECT,      ERR_TCP_CONNECT,      _error },
   { E_CURL_INIT,        ERR_CURL_INIT,        _error },
   { E_CURL_TCPFAST,     ERR_CURL_TCPFAST,     _error },
+  { E_CURL_DNSCACHE,    ERR_CURL_DNSCACHE,    _error },
   { E_CURL_WF,          ERR_CURL_WF,          _error },
   { E_CURL_MAXCONNS,    ERR_CURL_MAXCONNS,    _error },
   { E_CURL_SSL_PEER,    ERR_CURL_SSL_PEER,    _error },

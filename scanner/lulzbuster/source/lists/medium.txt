@@ -4622,7 +4622,6 @@ adminlinks.%EXT%
 admin_links.php
 adminLinks.php
 admin_listall.php
-??? Admin_list.asp
 Admin_list.asp
 adminlist.%EXT%
 adminlistings.x
@@ -7668,6 +7667,7 @@ Bin/
 bin/admin.pl
 binaries
 binary
+Binary file medium.txt matches
 bin/cfgwiz.exe
 bin/CGImail.exe
 bin/common/user_update_passwd.pl
@@ -11754,7 +11754,6 @@ contact_seller
 contactshort
 contacts_index.php
 contact_thanks
-contact us
 contact-us
 contact_us
 contactus
@@ -14220,7 +14219,6 @@ documento
 documentos
 _documents
 documents
-Documents and Settings
 doc/webmin.config.notes
 dodaj-strone
 dodge
@@ -14283,7 +14281,6 @@ dom.php
 don
 donald
 donate
-donate cash
 donation
 donations
 donationsadmin
@@ -15691,7 +15688,6 @@ examplesWebApp
 examplesWebApp/*
 examplesWebApp/ConnectorServlet
 examplesWebApp/docs/
-examplesWebApp/docs -> /docs
 examplesWebApp/domains
 examplesWebApp/EJBeanManagedClient.jsp
 examplesWebApp/examples
@@ -15706,7 +15702,6 @@ examplesWebApp/OrderParser.jsp?xmlfile=C:/bea/weblogic81/samples/server/examples
 examplesWebApp/SenderServlet
 examplesWebApp/server
 examplesWebApp/SessionServlet
-examplesWebApp/Shutdown -> 401
 examplesWebApp/SimpleSqlServlet
 examplesWebApp/SSLClientServlet
 examplesWebApp/WebservicesEJB.jsp
@@ -15855,7 +15850,6 @@ extern
 _external
 external
 .external/data
-external files
 externalid
 externalisation
 externalization
@@ -19163,7 +19157,6 @@ home.nsf
 home/oas/OraHome_1/
 homeowner
 homeowners
-home page
 home-page
 home_page
 homepage
@@ -21401,7 +21394,6 @@ irj/servlet/prt/portal
 irj/servlet/prt/portal/
 irj/servlet/prt/portal/prtroot
 irj/servlet/prt/portal/prtroot/com.sap.km.cm.basicsearch
-irj/servlet/prt/portal/prtroot/com.sap.km.cm.docs -> webdav
 irj/servlet/prt/portal/prtroot/com.sap.km.cm.highlightedcontent
 irj/servlet/prt/portal/prtroot/com.sap.km.cm.navigation
 irj/servlet/prt/portal/prtroot/com.sap.km.cm.uidetails
@@ -24637,7 +24629,6 @@ libs/bower_components/html5shiv/dist/html5shiv.min.js
 libs/bower_components/html5shiv/dist/html5shiv-printshiv.js
 libs/bower_components/html5shiv/dist/html5shiv-printshiv.min.js
 libs/bower_components/html5shiv/Gruntfile.js
-libs/bower_components/html5shiv/MIT and GPL2 licenses.md
 libs/bower_components/html5shiv/package.json
 libs/bower_components/html5shiv/readme.md
 libs/bower_components/iframe-resizer/bower.json
@@ -27903,7 +27894,6 @@ misc_files
 misc/gpl-3.0.txt
 /misc/grippie.png
 /misc/help.png
-misc/How to install Piwik.html
 misc_images
 misc/internal-docs/content-tracking.md
 /misc/jquery.ba-bbq.js
@@ -28239,7 +28229,6 @@ moderators
 mode-reply
 modernbill
 moderncf2
-modern mom
 modern_mom
 _mod_files
 .modgit/
@@ -29647,7 +29636,6 @@ my-profile
 my_profile
 myprofile
 MyProfile.aspx
-my project
 mypub
 myquicklinks.aspx
 my-remote
@@ -29990,7 +29978,6 @@ networking
 networks
 neu
 neufgiga
-neuf giga photo
 neurology
 nevada
 _new
@@ -35319,7 +35306,6 @@ plaintext
 plan
 plane
 planet
-planned giving
 planner
 planners
 planning
@@ -41339,7 +41325,6 @@ pressoffice
 press-release
 press_release
 pressrelease
-press releases
 press-releases
 press_releases
 pressreleases
@@ -41434,7 +41419,6 @@ privacy
 Privacy
 Privacy.html
 PRIVACY.md
-privacy policy
 privacy-policy
 privacy_policy
 privacypolicy
@@ -41728,7 +41712,6 @@ programari
 programas
 program_files
 programfiles
-Program Files
 programm
 programme
 programmes
@@ -42867,7 +42850,6 @@ reports
 reports/
 Reports.aspx
 reports/examples/Tools/test.jsp
-reports list
 reports.nsf
 reports-old
 reports/pages/default.aspx
@@ -45135,7 +45117,6 @@ sec
 [SecCheck]/..%252f..%252f../ext.ini
 [SecCheck]/..%255c..%255c../ext.ini
 [SecCheck]/..%2f../ext.ini
-secció
 seccio
 seccion
 secciones
@@ -45778,7 +45759,6 @@ sharedadmin
 shared_assets
 shared-content
 shareddocs
-shared documents/forms/allitems.aspx
 shared_files
 sharedfiles
 shared_gfx
@@ -46302,7 +46282,6 @@ sitemanager.aspx
 sitemanager.aspx?lro=all
 sitemanager.xml
 _sitemap
-site map
 site-map
 site_map
 sitemap
@@ -47617,7 +47596,6 @@ style_emoticons
 stylegallery
 styleguide
 style_images
-style library
 stylepreviewer
 _styles
 styles
@@ -53062,7 +53040,6 @@ votedel.asp
 votedy.asp
 vote_function.asp
 votelist.asp
-??? Vote_List.asp
 Vote_List.asp
 votemodify.asp
 votephp
@@ -53866,7 +53843,6 @@ webportal
 webposition
 webpub
 web.rar
-web references
 webreg
 web.Release.config
 webreport

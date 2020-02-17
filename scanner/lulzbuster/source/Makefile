@@ -64,7 +64,7 @@ INCDIR = inc
 SRCDIR = src
 
 CFLAGS += -W -Wall -Wextra -O2 -pthread -I $(INCDIR)
-#CFLAGS += -W -Wall -Wextra -O3 -g -g3 -ggdb -fstack-protector-all -fPIE -fPIC
+#CFLAGS += -W -Wall -Wextra -O2 -g -g3 -ggdb -fstack-protector-all -fPIE -fPIC
 #CFLAGS += -pthread -D_FORTIFY_SOURCE=2 -Wl,-z,now -Wl,-z,relro -I $(INCDIR)
 
 LDFLAGS = -lcurl
@@ -90,7 +90,7 @@ default:
 
 lulzbuster: $(OBJS)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
-	#$(STRIP) lulzbuster
+	$(STRIP) lulzbuster
 
 install:
 	$(MKDIR) $(INSTDIR)

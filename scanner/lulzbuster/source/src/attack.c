@@ -39,8 +39,8 @@ static void *attack(job_T *);
 /* attack worker thread */
 static void *attack(job_T *job)
 {
-  curl_off_t real_size = 0, size = 0;
-  register double bytes = 0;
+  curl_off_t real_size = 0, size = 0, crtime = 0;
+  register double bytes = 0, rtime = 0;
   static size_t curjob = 0;
   register size_t i = 0;
   long code = 0;
@@ -52,41 +52,51 @@ static void *attack(job_T *job)
   curjob++;
 
   /* overwrite default UA with random ones if requested */
-  if (job->rand_ua == ON) {
+  if (job->opts->rand_ua == ON) {
     curl_easy_setopt(job->eh, CURLOPT_USERAGENT, get_rand_useragent());
   }
 
   /* make http request */
-  if (job->delay != 0) {
-    sleep(job->delay);
+  if (job->opts->delay != 0) {
+    sleep(job->opts->delay);
   }
-  do_req(job->url, job->eh, job->sh);
+  do_req(job->url, job->eh, job->opts->curl->sh);
 
   /* get needed infos from http response */
   curl_easy_getinfo(job->eh, CURLINFO_RESPONSE_CODE, &code);
   curl_easy_getinfo(job->eh, CURLINFO_SIZE_DOWNLOAD_T, &size);
+  curl_easy_getinfo(job->eh, CURLINFO_TOTAL_TIME_T, &crtime);
 
-  /* convert sizes */
-  real_size = size;
-  bytes = size >= KBYTE ? size = (double) size / KBYTE, suf = 'K' : size;
-  bytes = size >= MBYTE ? size = (double) size / MBYTE, suf = 'M' : size;
-  bytes = size >= GBYTE ? size = (double) size / GBYTE, suf = 'G' : size;
+  /* convert response sizes */
+  bytes = real_size = size;
+  if (size >= KBYTE) {
+    bytes = (double) size / KBYTE;
+    suf = 'K';
+  } else if (size >= MBYTE) {
+    bytes = (double) size / MBYTE;
+    suf = 'M';
+  } else if (size >= GBYTE) {
+    bytes = (double) size / GBYTE;
+    suf = 'G';
+  }
 
-  /* print shit we are interested in. exclude given status codes.
-   * TODO: this shit slows down our attack. we need to find another way... */
-  for (i = 0; i < job->num_ex_codes; ++i) {
-    if (code == job->http_ex_codes[i]) {
+  /* convert time sizes */
+  rtime = crtime / 1000000.00;
+
+  /* print shit we are interested in. exclude given status codes. */
+  for (i = 0; i < job->opts->num_http_ex_codes; ++i) {
+    if (code == job->opts->http_ex_codes[i]) {
       curl_easy_cleanup(job->eh);
       return NULL;
     }
   }
 
-  if (code != 0 && code != HTTP_NOT_FOUND) {
+  if (code != HTTP_ZERO && code != HTTP_NOT_FOUND) {
     /* do smart checks */
-    if (job->smart == TRUE) {
+    if (job->opts->smart == TRUE) {
       /* return NULL if equal to our initial wildcard-probe size */
-      if (code == job->wcard.resp_code) {
-        if (real_size == job->wcard.resp_size) {
+      if (code == job->opts->wcard.resp_code) {
+        if (real_size == job->opts->wcard.resp_size) {
           curl_easy_cleanup(job->eh);
           return NULL;
         }
@@ -135,19 +145,13 @@ void launch_attack(opts_T *opts)
   }
 
   /* initiate needed opts, add attacker threads to pool and fire shit */
+  JLOG(HEADLINE);
   for (i = 0; i < opts->num_attack_urls; ++i) {
     job[i] = xcalloc(1, sizeof(job_T));
-    job[i]->delay = opts->delay;
-    job[i]->wcard = opts->wcard;
+    job[i]->opts = opts;
     job[i]->logfile = logfile;
-    job[i]->smart = opts->smart;
-    job[i]->num_jobs = opts->num_attack_urls;
-    job[i]->http_ex_codes = opts->http_ex_codes;
-    job[i]->num_ex_codes = opts->num_http_ex_codes;
-    job[i]->rand_ua = opts->rand_ua;
     job[i]->url = opts->attack_urls[i];
     job[i]->eh = curl_easy_duphandle(opts->curl->eh);
-    job[i]->sh = opts->curl->sh;
     thpool_add_work(thpool, (void *) attack, (void *) job[i]);
   }
 
@@ -162,7 +166,7 @@ void launch_attack(opts_T *opts)
   }
   free(job);
   if (opts->logfile) {
-    if (!fclose(logfile)) {
+    if (fclose(logfile) == EOF) {
       err(W_CLOG);
     }
   }

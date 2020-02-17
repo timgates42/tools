@@ -64,38 +64,42 @@ char **build_urls(const char *url, char **wordlist, const size_t num_words,
 }
 
 
-/* read lines from a file. kill <lastchar> with 0x00 if given. */
-char **read_lines(const char *filename, size_t line_len, const int lastchar)
+/* read lines from a file. kill <lastchar> with 0x00 if given. count lines */
+char **read_lines(const char *filename, size_t line_len, size_t *num_lines,
+                  const int lastchar)
 {
   FILE *fp = NULL;
   char **lines = NULL;
-  register size_t cur_len = 0, last = 0, i = 0;
+  register size_t cur_len = 0, last = 0;
+
+  /* just in case */
+  *num_lines = 0;
 
   if ((fp = fopen(filename, "r")) == NULL) {
     return NULL;
   }
 
-  /* let's set default then: 2KB */
+  /* let's set default then: 1KB */
   if (line_len == 0) {
     line_len = DEF_LINE_LEN;
   }
 
   lines = xcalloc(1, sizeof (char *));
   do {
-    lines[i] = xcalloc(1, line_len);
-    if (fgets(lines[i], line_len, fp) == NULL) {
+    lines[*num_lines] = xcalloc(1, line_len);
+    if (fgets(lines[*num_lines], line_len, fp) == NULL) {
       fclose(fp);
       return lines;
     }
-    cur_len = strlen(lines[i]);
+    cur_len = strlen(lines[*num_lines]);
     last = cur_len - 1;
     if (cur_len != 0) {
-      if (lastchar != 0 && (lines[i][last] == lastchar)) {
-        lines[i][last] = 0x00; /* kill newline */
+      if (lastchar != 0 && (lines[*num_lines][last] == lastchar)) {
+        lines[*num_lines][last] = 0x00; /* kill newline */
       }
     }
-    i++;
-    lines = xrealloc(lines, sizeof (char *) * (i + 1));
+    ++(*num_lines);
+    lines = xrealloc(lines, sizeof (char *) * (*num_lines + 1));
   } while (!feof(fp));
 
   fclose(fp);
@@ -153,9 +157,7 @@ char *touplow(const char *str, const char *to)
 }
 
 
-/* parse string with given delimiter and create a char **foo.
- * TODO: make dynamic! either pass two times and calloc() or realloc() with
- * one-time pass. */
+/* parse string with given delimiter and create a char **foo. */
 char **parse_str_token(char *str, const char *delim,
                        const unsigned char num_substr)
 {
@@ -173,9 +175,7 @@ char **parse_str_token(char *str, const char *delim,
   return parsed;
 }
 
-/* parse string with given delimiter and create a long int *foo.
- * TODO: make dynamic! either pass two times and calloc() or realloc() with
- * one-time pass. */
+/* parse string with given delimiter and create a long int *foo. */
 long int *parse_str_toint_token(char *str, const char *delim,
                                const unsigned char num_substr)
 {

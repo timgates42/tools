@@ -44,6 +44,13 @@ unsigned char set_http_options(opts_T *opts)
     return FALSE;
   }
 
+  /* set dns caching to remain forever */
+  if (curl_easy_setopt(opts->curl->eh, CURLOPT_DNS_CACHE_TIMEOUT, -1L) != \
+      CURLE_OK) {
+    err(E_CURL_DNSCACHE);
+    return FALSE;
+  }
+
   /* send curl data (http responses) to our write_cb() callback */
   if (curl_easy_setopt(opts->curl->eh, CURLOPT_WRITEFUNCTION, write_cb) != \
       CURLE_OK) {
@@ -291,20 +298,15 @@ void set_extensions(opts_T *opts)
 }
 
 
-/* set attack_urls, count final urls and http ex codes */
+/* set attack_urls, count final urls and count http excluded codes */
 void set_attack_urls(opts_T *opts)
 {
   char **tmpwords = NULL, **tptr = NULL;
-  register size_t i = 0, num_words = 0;
-
-  /* wc -l $wordlist */
-  if ((num_words = count_lines(opts->wordlist)) == 0) {
-    free_lulzbuster(opts);
-    err(E_WLIST_CNT);
-  }
+  register size_t i = 0;
+  size_t num_words = 0;
 
   /* read in wordlist file */
-  tmpwords = read_lines(opts->wordlist, 0, '\n');
+  tmpwords = read_lines(opts->wordlist, 0, &num_words, '\n');
 
   /* we know that some fuckups occured if 1st item is NULL. free() shit */
   if (tmpwords[0] == NULL) {
@@ -321,12 +323,13 @@ void set_attack_urls(opts_T *opts)
   for (tptr = opts->attack_urls; *tptr != NULL; ++tptr,
        ++opts->num_attack_urls);
 
-  /* get num http ex codes */
+  /* get num http excluded codes */
   for (i = 0; opts->http_ex_codes[i] != 0; ++i, ++opts->num_http_ex_codes);
 
-  /* we are done with tmpwords. free that shit */
-  for (i = 0; i < num_words + 1; ++i)
+  /* we are done with tmpwords. free() that shit */
+  for (i = 0; i < num_words + 1; ++i) {
     free(tmpwords[i]);
+  }
   free(tmpwords);
 
   return;
@@ -336,11 +339,15 @@ void set_attack_urls(opts_T *opts)
 /* set default options */
 void set_default_opts(opts_T *opts)
 {
-  /* default http status codes. dirty code here. will change this */
-  opts->http_ex_codes = xcalloc(3, sizeof(long unsigned int));
-  opts->http_ex_codes[0] = HTTP_NOT_FOUND;
-  opts->http_ex_codes[1] = HTTP_SERVICE_UNAVAILABLE;
-  opts->http_ex_codes[2] = HTTP_ZERO;
+  /* default http status codes to exclude. */
+  opts->http_ex_codes = xcalloc(7, sizeof(long unsigned int));
+  opts->http_ex_codes[0] = HTTP_BAD_REQUEST;
+  opts->http_ex_codes[1] = HTTP_NOT_FOUND;
+  opts->http_ex_codes[2] = HTTP_INTERNAL_SERVER_ERROR;
+  opts->http_ex_codes[3] = HTTP_NOT_IMPLEMENTED;
+  opts->http_ex_codes[4] = HTTP_BAD_GATEWAY;
+  opts->http_ex_codes[5] = HTTP_SERVICE_UNAVAILABLE;
+  opts->http_ex_codes[6] = HTTP_ZERO;
 
   opts->http_method = touplow(DEF_HTTP_METHOD, "up"); /* because of free() */
   opts->follow_redir_level = DEF_FOLLOW_REDIR_LEVEL;

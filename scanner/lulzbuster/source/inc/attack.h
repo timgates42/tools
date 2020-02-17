@@ -39,21 +39,26 @@
  ******************************************************************************/
 
 
+/* headline before formatstring */
+#define HEADLINE "code   size   real size   resp time   url\n\n"
+
+/* formatstring for hit line */
+#define HITFMT "%ld | %4.0lf%c | %8luB | %lfs | %s\n"
+
 /* hit line */
 #define __HIT(log) \
-  if (log == stderr) {\
-    CLOG(log, BGREEN"\r[*] "CRESET"%ld - %6.0lf%c %s\n", code, bytes, suf, \
+  CLOG(stderr, BGREEN"\r[*] "CRESET HITFMT, code, bytes, suf, real_size, rtime,\
+       job->url); \
+  if (log != stderr) {\
+    CLOG(log, "[*] "CRESET HITFMT, code, bytes, suf, real_size, rtime, \
          job->url); \
-  } \
-  else {\
-    CLOG(log, "[*] %ld - %6.0lf%c %s\n", code, bytes, suf, job->url); \
   }
 
 /* status line */
-#define PERCENT (double) (curjob * 100) / (double) job->num_jobs
+#define PERCENT (double) (curjob * 100) / (double) job->opts->num_attack_urls
 #define __STATUS \
   CLOG(stderr, "\r"BBLUE"[+]"CRESET" scanning %lu / %lu (%.2f%%)", curjob, \
-       job->num_jobs, PERCENT)
+       job->opts->num_attack_urls, PERCENT)
 
 
 /*******************************************************************************
@@ -63,18 +68,10 @@
 
 /* our attack job */
 typedef struct {
-  unsigned int delay;
-  wildcard_T wcard;
   FILE *logfile;
-  unsigned char smart;
-  size_t num_ex_codes;
-  size_t num_jobs;
-  long int *http_ex_codes;
-  unsigned char rand_ua;
   const char *url;
   CURL *eh;
-  CURLSH *sh;
-  CURLcode *res;
+  opts_T *opts;
 } job_T;
 
 

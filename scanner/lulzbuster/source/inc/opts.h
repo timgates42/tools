@@ -40,7 +40,7 @@
 
 
 /* default options */
-#define DEF_HTTP_EX_CODES       "404,503"
+#define DEF_HTTP_EX_CODES       "400,404,500,501,502,503"
 #define DEF_HTTP_METHOD         "GET"
 #define DEF_WORDLIST            "/usr/local/share/lulzbuster/lists/medium.txt"
 #define DEF_USERAGENT           "Mozilla/5.0 (Windows NT 10.0; Win64; x64; " \
@@ -83,9 +83,10 @@
     FP(stderr, "    > redir level:  %ld", opts->follow_redir_level); \
     CLOG(stderr, "\n"); \
   }\
-  FP(stderr, "    > ua:           %s", opts->useragent); CLOG(stderr, "\n"); \
   if (opts->rand_ua != OFF) {\
     FP(stderr, "    > random ua:    %u", opts->rand_ua); CLOG(stderr, "\n"); \
+  } else {\
+    FP(stderr, "    > ua:           %s", opts->useragent); CLOG(stderr, "\n"); \
   }\
   if (opts->http_header) {\
     FP(stderr, "    > http header:  %s", opts->http_header); \
@@ -128,6 +129,7 @@
   } else {\
     FP(stderr, "    > logfile:      stderr"); CLOG(stderr, "\n");\
   }\
+  FP(stderr, "    > smart mode:   %u\n", opts->smart);\
   CLOG(stderr, "\n")
 
 
@@ -175,6 +177,7 @@ typedef struct {
   wildcard_T wcard;                 /* wildcard table */
   curl_T *curl;                     /* pointer to curl table */
 } opts_T;
+  /*} __attribute__((packed)) opts_T;*/
 
 
 /*******************************************************************************

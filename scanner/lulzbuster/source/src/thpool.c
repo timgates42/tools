@@ -8,8 +8,8 @@
  *
  ********************************/
 
-#define _POSIX_C_SOURCE 200809L
 #include <unistd.h>
+#define _POSIX_C_SOURCE 200809L
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -227,7 +227,7 @@ void thpool_destroy(thpool_* thpool_p){
 	/* Poll remaining threads */
 	while (thpool_p->num_threads_alive){
 		bsem_post_all(thpool_p->jobqueue.has_jobs);
-		sleep(1);
+		usleep(500000);
 	}
 
 	/* Job queue cleanup */
@@ -301,7 +301,7 @@ static void thread_hold(int sig_id) {
     (void)sig_id;
 	threads_on_hold = 1;
 	while (threads_on_hold){
-		sleep(1);
+		usleep(500000);
 	}
 }
 

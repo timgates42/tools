@@ -147,6 +147,7 @@ wildcard_T check_conn_wildcard(const char *url)
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
     res = curl_easy_perform(curl);
+    free(randurl);
     if (res != CURLE_OK) {
       wcard.conn_ok = FALSE;
     } else {
@@ -156,7 +157,6 @@ wildcard_T check_conn_wildcard(const char *url)
     }
   }
 
-  free(randurl);
   curl_easy_cleanup(curl);
 
   return wcard;
@@ -232,10 +232,8 @@ void print_useragents()
 /* do some necessary curl related cleanups */
 unsigned char cleanup_http(curl_T *curl)
 {
-  if (curl_share_cleanup(curl->sh) != CURLSHE_OK) {
-    return FALSE;
-  }
   curl_slist_free_all(curl->list);
+  curl_share_cleanup(curl->sh);
   curl_easy_cleanup(curl->eh);
   curl_global_cleanup();
 
@@ -336,11 +334,10 @@ unsigned char init_locks(void)
 
 
 /* write callback func for curl */
-size_t write_cb(void *buff, size_t size, size_t nmemb, void *userptr)
+size_t write_cb(void *buff, register size_t size, register size_t nmemb,
+                void *userptr)
 {
   (void) buff;
-  (void) size;
-  (void) nmemb;
   (void) userptr;
 
   return size * nmemb; /* curl wants this otherwise we get '23' error code */
@@ -351,19 +348,19 @@ size_t write_cb(void *buff, size_t size, size_t nmemb, void *userptr)
 unsigned char do_req(const char *url, CURL *handler, CURLSH *share)
 {
   register unsigned char check_ok = TRUE;
-  /* static unsigned char num_err = 0;
-  CURLcode res = 0; */
+  /*static unsigned char num_err = 0;
+  CURLcode res = 0;*/
 
   /* set url and use shared object for our easy handlers */
   curl_easy_setopt(handler, CURLOPT_URL, url);
   curl_easy_setopt(handler, CURLOPT_SHARE, share);
 
-  curl_easy_perform(handler);
   /* fire request. print error message in case something went wrong.
    * note: we could use CURLOPT_ERRORBUFFER here instead but the generic msg
    * from curl are enough.
-   * TODO: be more pragmatic here and handle this correctly (stats, etc.)
-  res = curl_easy_perform(handler);
+   * TODO: be more pragmatic here and handle this correctly (stats, etc.) */
+  curl_easy_perform(handler);
+  /*res = curl_easy_perform(handler);
   switch (res) {
    case CURLE_OK:
      break;
@@ -418,8 +415,7 @@ unsigned char do_req(const char *url, CURL *handler, CURLSH *share)
        WSLOG("unknown curl error: %s\n", curl_easy_strerror(res));
      }
   }
-  */
-
+*/
   return check_ok;
 }
 
