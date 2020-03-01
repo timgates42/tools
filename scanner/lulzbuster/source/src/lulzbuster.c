@@ -69,10 +69,11 @@ int main(int argc, char *argv[])
   }
   JSLOG("connection ok\n");
 
-  /* check for wildcard HTTP-200 response */
-  JSLOG("wildcard check (HTTP 200)\n");
+  /* check for wildcard !HTTP-404 response */
+  JSLOG("wildcard check\n");
   if (opts->wcard.resp_code == HTTP_OK) {
-    WSLOG("wildcard response for ANY resource request\n");
+    WSLOG("wildcard response found for any resource request: HTTP %ld\n",
+          opts->wcard.resp_code);
   } else {
     GSLOG("lulz! no wildcard detected\n");
   }

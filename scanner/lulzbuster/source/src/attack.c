@@ -91,7 +91,7 @@ static void *attack(job_T *job)
     }
   }
 
-  if (code != HTTP_ZERO && code != HTTP_NOT_FOUND) {
+  if (code != HTTP_ZERO && code != HTTP_NOT_FOUND && real_size != 0) {
     /* do smart checks */
     if (job->opts->smart == TRUE) {
       /* return NULL if equal to our initial wildcard-probe size */

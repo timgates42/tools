@@ -108,29 +108,6 @@ char **read_lines(const char *filename, size_t line_len, size_t *num_lines,
 }
 
 
-/* count lines in a file, wc -l ;) */
-size_t count_lines(const char *filename)
-{
-  FILE *fp = NULL;
-  long int c = 0;
-  size_t lines = 0;
-
-  if ((fp = fopen(filename, "r")) == NULL) {
-    return FALSE;
-  }
-
-  while ((c = fgetc(fp)) != EOF) {
-    if (c == '\n') {
-      lines++;
-    }
-  }
-
-  fclose(fp);
-
-  return lines;
-}
-
-
 /* convert given string to upper-case or lower-case */
 char *touplow(const char *str, const char *to)
 {
