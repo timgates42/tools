@@ -50,8 +50,7 @@
   CLOG(stderr, BGREEN"\r[*] "CRESET HITFMT, code, bytes, suf, real_size, rtime,\
        job->url); \
   if (log != stderr) {\
-    CLOG(log, "[*] "CRESET HITFMT, code, bytes, suf, real_size, rtime, \
-         job->url); \
+    CLOG(log, "[*] "HITFMT, code, bytes, suf, real_size, rtime, job->url); \
   }
 
 /* status line */
