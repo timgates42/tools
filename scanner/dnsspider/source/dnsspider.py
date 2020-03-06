@@ -104,7 +104,7 @@ except ImportError:
 BANNER = '--==[ dnsspider by noptrix@nullsecurity.net ]==--'
 USAGE = '\n' \
   '  dnsspider.py -t <arg> -a <arg> [options]'
-VERSION = 'v1.1'
+VERSION = 'v1.2'
 
 defaults = {}
 hostnames = []
