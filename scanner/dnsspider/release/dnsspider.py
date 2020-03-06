@@ -20,6 +20,9 @@
 #                                                                              #
 # CHANGELOG:                                                                   #
 #                                                                              #
+# v1.2                                                                         #
+# - add '-f' option to force scanning after positive wildcard check            #
+#                                                                              #
 # v1.1                                                                         #
 # - add wildcard check.                                                        #
 # - update built-in wordlist (23k)                                             #
@@ -227,6 +230,10 @@ def parse_cmdline():
     help='number of threads to use (default: 50)'
   )
   p.add_argument(
+    '-f', action='store_true', dest='force',
+    help='force scanning if wildcard check was positive'
+  )
+  p.add_argument(
     '-r', metavar='<logfile>', dest='logfile', default='stdout',
     help='write found subdomains to file (default: stdout)'
   )
@@ -400,10 +407,17 @@ def log_results(opts, found, diffound):
 
 def check_wildcard(opts):
   print('[+] running wildcard detection')
+  emsg = 'wildcard response detected! all subdomains point to same ip-addr. '
+  emsg += "use '-f' option to force scanning"
+  wmsg = "wildcard response detected. continuing because '-f' was chosen"
   try:
     fake = socket.gethostbyname(opts.charset + '.' + opts.domain)
-    print('''[-] ERROR: wildcards detected! all subdomains will point to same ip-addr. makes no sense to continue... aborting''')
-    os._exit(1)
+    if opts.force:
+      print(f"[!] WARNING: {wmsg}")
+      return
+    else:
+      print(f'[-] ERROR: {emsg}... aborting')
+      os._exit(1)
   except:
     pass
 
