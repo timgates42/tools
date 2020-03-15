@@ -10,7 +10,7 @@
 # Hyperion: A runtime PE-Crypter                                              #
 #                                                                             #
 # VERSION                                                                     #
-# 2.2                                                                         #
+# 2.3-Snapshot                                                                #
 #                                                                             #
 # DATE                                                                        #
 # 12/11/2019                                                                  #
@@ -43,6 +43,13 @@
 # - Remove macros in Asm Code                                                 #
 #                                                                             #
 # CHANGELOG:                                                                  #
+#                                                                             #
+# v2.3:                                                                       #
+# - log message strings were still in non-log binaries -> removed             #
+# - each function uses shadow registers -> preparation for code morphing      #
+# - basic win32 apis are part of import table and not loaded dynamically      #
+# - output size for non-log binaries reduced by 4kb                           #
+# - 32 bit is now deprecated                                                  #
 #                                                                             #
 # v2.2:                                                                       #
 # - removed aes.dll blob and use tinyAes c implementation instead             #

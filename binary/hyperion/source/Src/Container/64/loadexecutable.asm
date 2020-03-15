@@ -27,9 +27,7 @@ loaded_file:QWORD
 	writeWithNewLine createStringMappingFileInMemory, str1, le_exit_error
 	mov rax,[input_image]
 	add rax,4
-	mov rcx,INFILE_SIZE
-	sub rcx,4
-	fastcall loadFile, [image_file_header], rax, rcx
+	fastcall loadFile, [image_file_header], rax, INFILE_SIZE-4
 	test rax,rax
 	mov [loaded_file],rax
 	jz le_exit_error
