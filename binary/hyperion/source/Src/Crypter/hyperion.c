@@ -11,7 +11,7 @@ extern BOOL display_verbose;
 int main(int argc, char *argv[]){
         if(argc<3) {
                 printf("Hyperion PE-Crypter\n");
-                printf("Version 2.2 by Christian Ammann\n");
+                printf("Version 2.3 by Christian Ammann\n");
                 printf("Http://www.phobosys.de/hyperion\n");
                 printf("\n");
                 printf("Usage: hyperion.exe <options> <infile> <outfile>\n");
@@ -246,6 +246,15 @@ int main(int argc, char *argv[]){
         }
         else if(exitCode==0 && display_verbose){
             printf("\nDone :-)\n");
+        }
+
+        //warning for deprecation
+        if(pe32) {
+            printf("############################################\n");
+            printf("# Warning: You encrypted a 32 bit PE file. #\n");
+            printf("# 32 bit support is not maintained anymore #\n");
+            printf("# since release 2.3                        #\n");
+            printf("############################################\n");
         }
 
         // Close the handles.
