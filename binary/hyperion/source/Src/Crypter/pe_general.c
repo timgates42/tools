@@ -4,6 +4,23 @@
 
 #include "hyperion.h"
 
+BOOL isGuiApplication(uint16_t subsystem){
+    switch(subsystem){
+        case IMAGE_SUBSYSTEM_WINDOWS_GUI: 
+            verbose("Found gui flag in binary\n");
+            return TRUE;
+            break;
+        case IMAGE_SUBSYSTEM_WINDOWS_CUI: 
+            verbose("Found commandline flag in binary\n");
+            return FALSE;
+            break;
+        default:
+            printf("Unknown subsystem 0x%x, handling binary as gui application\n");
+            return TRUE;
+            break;
+    }
+}
+
 BOOL isExecutable(struct CoffHeader* coff_header){
         if (coff_header==0) {
                 return FALSE;

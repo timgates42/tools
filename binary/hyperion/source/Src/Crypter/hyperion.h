@@ -25,6 +25,7 @@ struct PEData {
         uint32_t ImageBase32;
         uint64_t ImageBase64;
         uint32_t SizeOfImage;
+        BOOL GuiApplication;
 };
 
 //verbose api
@@ -39,6 +40,7 @@ BOOL memToFile(const char* file_name, char* content, unsigned long size,
 struct CoffHeader* getCoffHeader(struct OpenFile* input_file);
 BOOL isExecutable(struct CoffHeader* coff_header);
 BOOL isPE32(struct CoffHeader* coff_header);
+BOOL isGuiApplication(uint16_t subsystem);
 struct OptionalStandardHeader32* getOSH32(struct CoffHeader* coff_ptr);
 struct OptionalStandardHeader64* getOSH64(struct CoffHeader* coff_ptr);
 struct OptionalWindowsHeader32* getOWH32(struct OptionalStandardHeader32* os_ptr);

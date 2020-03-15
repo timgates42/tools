@@ -106,6 +106,7 @@ int main(int argc, char *argv[]){
                 pe_data.ImageBase32 = owh32->ImageBase;
                 pe_data.SizeOfImage = owh32->SizeOfImage;
                 container_directory = CONTAINER32_DIR;
+                pe_data.GuiApplication = isGuiApplication(owh32->Subsystem);
         }
         else{
                 verbose("Found 64 bit binary\n");
@@ -116,6 +117,7 @@ int main(int argc, char *argv[]){
                 pe_data.ImageBase64 = owh64->ImageBase;
                 pe_data.SizeOfImage = owh64->SizeOfImage;
                 container_directory = CONTAINER64_DIR;
+                pe_data.GuiApplication = isGuiApplication(owh64->Subsystem);
         }
 
         //create decryption stub

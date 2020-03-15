@@ -12,6 +12,9 @@
 #define SECTION_NAME_SIZE 8
 #define IMAGE_BASE_ALIGNMENT 0x10000
 
+#define IMAGE_SUBSYSTEM_WINDOWS_GUI 2
+#define IMAGE_SUBSYSTEM_WINDOWS_CUI 3
+
 struct MZHeader {
         uint8_t signature[MZ_SIGNATURE_SIZE];
         uint8_t data[0x3a];

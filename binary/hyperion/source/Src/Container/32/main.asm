@@ -1,7 +1,8 @@
 ; Hyperion 32-Bit container.exe
 
 include 'image_base.inc'
-format PE GUI 4.0 at IMAGE_BASE
+;format PE GUI 4.0 at IMAGE_BASE
+format PE console 4.0 at IMAGE_BASE
 entry start
 
 include '..\..\..\Fasm\INCLUDE\win32a.inc'
