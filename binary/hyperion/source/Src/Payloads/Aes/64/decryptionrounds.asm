@@ -150,8 +150,9 @@ endp
 ;reverse shift operation for decryption
 proc inverseShiftRows uses rbx, data_ptr:QWORD
 
-    mov rbx,rcx;[data_ptr]
+    mov [data_ptr], rcx
 
+    mov rbx, [data_ptr]
     inc rbx
     fastcall loadRow, rbx
     rol eax, 24

@@ -74,6 +74,7 @@ endp
 
 ;generate next decryption key
 proc nextKey key_ptr:QWORD
+
 	mov [key_ptr],rcx
 
 	mov rax,[key_ptr]

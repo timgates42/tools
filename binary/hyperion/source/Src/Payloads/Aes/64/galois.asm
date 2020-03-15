@@ -58,7 +58,7 @@ endp
 
 ;create 4 lookup tables for multiplication in the
 ;galois field with 9, 11, 13 and 14
-proc createGaloisDecryption uses rdi rsi, mul9_ptr:DWORD, mul11_ptr:QWORD,\
+proc createGaloisDecryption uses rdi rsi, mul9_ptr:QWORD, mul11_ptr:QWORD,\
      mul13_ptr:QWORD, mul14_ptr:QWORD
 
      mov [mul9_ptr],rcx

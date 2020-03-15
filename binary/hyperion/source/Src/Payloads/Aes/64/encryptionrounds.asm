@@ -41,15 +41,13 @@ endp
 proc mixColumns23 uses rbx r12, data_ptr:QWORD, mul2_table_ptr:QWORD,\
      mul3_table_ptr:QWORD
 
-     local current_column:DWORD
-
+    local current_column:DWORD
     mov [data_ptr],rcx
     mov [mul2_table_ptr],rdx
     mov [mul3_table_ptr],r8
 	
     mov rdx, [data_ptr]
     mov r12,4
-
 mixColumns23_loop:
     ;element 3
     mov eax, [rdx]
@@ -133,18 +131,19 @@ endp
 
 proc loadRow uses rsi, data_ptr:QWORD
 
-   mov rsi,rcx ;[data_ptr]
-   xor rax,rax
+   mov [data_ptr], rcx
 
+   mov rsi, [data_ptr]
+   xor rax, rax
    lodsb
-   shl eax,8
-   add rsi,3
+   shl eax, 8
+   add rsi, 3
    lodsb
-   shl eax,8
-   add rsi,3
+   shl eax, 8
+   add rsi, 3
    lodsb
-   shl eax,8
-   add rsi,3
+   shl eax, 8
+   add rsi, 3
    lodsb
 
    ret
@@ -153,19 +152,23 @@ endp
 
 proc storeRow uses rdi, row:QWORD, data_ptr:QWORD
 
-   mov rdi,rdx ;[data_ptr]
-   mov eax,ecx ;[row]
-   rol eax,8
+   mov [row], rcx
+   mov [data_ptr], rdx
+
+   mov rdi, [data_ptr]
+   mov rcx, [row]
+   mov eax, ecx
+   rol eax, 8
 
    stosb
-   rol eax,8
-   add rdi,3
+   rol eax, 8
+   add rdi, 3
    stosb
-   rol eax,8
-   add rdi,3
+   rol eax, 8
+   add rdi, 3
    stosb
-   rol eax,8
-   add rdi,3
+   rol eax, 8
+   add rdi, 3
    stosb
 
    ret
@@ -174,8 +177,9 @@ endp
 
 proc shiftRows uses rbx, data_ptr:DWORD
 
-    mov rbx,rcx ;[data_ptr]
+    mov [data_ptr], rcx
 
+    mov rbx, [data_ptr]
     inc rbx
     fastcall loadRow, rbx
     rol eax, 8
@@ -197,14 +201,19 @@ endp
 ;in data
 proc addRoundKey data_ptr:QWORD, round_key_ptr:QWORD
 
-    mov r8,[rcx]
-    xor r8,[rdx]
-    mov [rcx],r8
-    add rcx,COLUMN_SIZE*2
-    add rdx,COLUMN_SIZE*2
-    mov r8,[rcx]
-    xor r8,[rdx]
-    mov [rcx],r8
+	mov [data_ptr], rcx
+	mov [round_key_ptr], rdx
+
+	mov rcx, [data_ptr]
+	mov rdx, [round_key_ptr]
+    mov r8, [rcx]
+    xor r8, [rdx]
+    mov [rcx], r8
+    add rcx, COLUMN_SIZE*2
+    add rdx, COLUMN_SIZE*2
+    mov r8, [rcx]
+    xor r8, [rdx]
+    mov [rcx], r8
     ret
 
 endp
@@ -212,11 +221,14 @@ endp
 ;substitute aes block with s-box
 proc subBlockBytes uses rbx r12, data_ptr:QWORD, sbox_ptr:QWORD
 
-    mov rbx,rdx ;sbox
-    mov r12,2
+	mov [data_ptr], rcx
+	mov [sbox_ptr], rdx 
 
+    mov rbx, [sbox_ptr]
+	mov rcx, [data_ptr]
+    mov r12, 2
 subBlockBytes_loop:
-    mov rax,[rcx] ;data_ptr
+    mov rax, [rcx] ;data_ptr
     xlatb
     ror rax, 8
     xlatb
@@ -234,7 +246,7 @@ subBlockBytes_loop:
     xlatb
     ror rax, 8
     mov [rcx], rax
-    add rcx,COLUMN_SIZE*2
+    add rcx, COLUMN_SIZE*2
 
     dec r12
     jnz subBlockBytes_loop

@@ -250,21 +250,29 @@ endp
 
 ;xor key dword with (rcon(index) 00 00 00)
 proc xorRcon uses rbx, key:QWORD, rcon_ptr:QWORD, rcon_index:QWORD
-     mov rax,r8 ; [rcon_index]
-     mov rbx,rdx; [rcon_ptr]
+     mov [key], rcx
+	 mov [rcon_ptr], rdx
+	 mov [rcon_index], r8
+
+     mov rax, [rcon_index]
+     mov rbx, [rcon_ptr]
      xlatb
-     shl rax,24
-     xor eax,ecx ;[key]
+     shl rax, 24
+	 mov rcx, [key]
+     xor eax, ecx
      ret
 endp
 
 ;returns in eax the column at column_index in the key chain
 proc loadColumn keychain_ptr:QWORD, column_index:QWORD
+	 mov [keychain_ptr], rcx
+	 mov [column_index], rdx
+
      ;create pointer to first byte of the colum
-     mov rax, rdx ;[column_index]
+     mov rax, [column_index]
      mov r8, COLUMN_SIZE
      mul r8
-     add rax, rcx ;[keychain_ptr]
+     add rax, [keychain_ptr]
      ;return dword and exit
      mov eax,[rax]
      bswap eax
@@ -273,8 +281,11 @@ endp
 
 ;substitute subkey's bytes with the sbox
 proc subBytes uses rbx, subkey:QWORD, sbox_ptr:QWORD
-     mov rax,rcx ;[subkey]
-     mov rbx,rdx ;[sbox_ptr]
+     mov [subkey], rcx
+	 mov [sbox_ptr], rdx
+
+     mov rax, [subkey]
+     mov rbx, [sbox_ptr]
      xlatb
      ror eax, 8
      xlatb
