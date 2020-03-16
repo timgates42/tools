@@ -9,7 +9,7 @@
 * A very fast and smart web-dir/file enumeration tool written in C.            *
 *                                                                              *
 * FILE                                                                         *
-* wrapper.h                                                                    *
+* signals.h                                                                    *
 *                                                                              *
 * AUTHOR                                                                       *
 * noptrix@nullsecurity.net                                                     *
@@ -17,8 +17,8 @@
 *******************************************************************************/
 
 
-#ifndef WRAPPER_H
-#define WRAPPER_H
+#ifndef SIGNALS_H
+#define SIGNALS_H
 
 
 /*******************************************************************************
@@ -27,10 +27,7 @@
 
 
 /* sys includes */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
+#include <signal.h>
 
 
 /* own includes */
@@ -39,24 +36,6 @@
 /*******************************************************************************
  * MACROS
  ******************************************************************************/
-
-
-/* clear, right? */
-#define FALSE 0x00
-#define TRUE  0x01
-#define ASK   0x02
-#define OFF   0L
-#define ON    1L
-
-/* exit() macros */
-#define __EXIT_SUCCESS  exit(EXIT_SUCCESS)
-#define __EXIT_FAILURE  exit(EXIT_FAILURE)
-
-/* replace atoi() with strtol() */
-#define ATOI(str) strtol(str, (char **) NULL, 10)
-
-/* get array size */
-#define ARRAY_SIZE(x) (sizeof((x)) / sizeof((x)[0]))
 
 
 /*******************************************************************************
@@ -78,19 +57,16 @@ typedef void sigfunc(int);
  ******************************************************************************/
 
 
-/* the declarations below this are only prototypes for our wrapper routines -
- * see the relevant manpages. don't bother me with this. */
-
-/* memory */
+/* reliable version of signal() using POSIX sigaction
+ * - ripped from Stevens (R.I.P.) */
 sigfunc *xsignal(int, sigfunc *);
-void *xrealloc(void *, size_t);
-void *xcalloc(size_t, size_t);
-void *xmalloc(size_t);
-void *xmemset(void *, int, size_t);
-void *xmemcpy(void *, const void *, size_t);
 
-/* misc */
-char *touplow(const char *, const char *);
+/* signal handlers */
+void sig_int(int);
+void sig_alrm(int);
+void sig_usr1(int);
+void sig_usr2(int);
+
 
 #endif
 

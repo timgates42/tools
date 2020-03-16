@@ -73,6 +73,7 @@ LDFLAGS = -lcurl
 OBJS = $(SRCDIR)/lulzbuster.o $(SRCDIR)/help.o $(SRCDIR)/checks.o
 OBJS += $(SRCDIR)/wrapper.o $(SRCDIR)/error.o $(SRCDIR)/opts.o $(SRCDIR)/http.o
 OBJS += $(SRCDIR)/misc.o $(SRCDIR)/thpool.o $(SRCDIR)/attack.o
+OBJS += $(SRCDIR)/signals.o
 
 $(SRCDIR)%.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)

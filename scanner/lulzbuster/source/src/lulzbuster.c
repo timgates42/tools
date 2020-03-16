@@ -29,6 +29,7 @@
 #include "misc.h"
 #include "http.h"
 #include "attack.h"
+#include "signals.h"
 
 
 /* main program flow, driver and controller */
