@@ -1,7 +1,7 @@
 ; Hyperion 64-Bit container.exe
 
 include 'image_base.inc'
-format PE64 GUI 5.0 at IMAGE_BASE
+include 'main_prolog.inc' ;format PE64 ...
 entry start
 
 include '..\..\..\Fasm\INCLUDE\win64a.inc'

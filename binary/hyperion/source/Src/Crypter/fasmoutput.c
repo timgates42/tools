@@ -153,3 +153,46 @@ BOOL fasmInclude(const char* output_dir, const char* file_name,
                 return TRUE;
         }
 }
+
+BOOL fasmHeader(BOOL guiApp, BOOL pe32plus){
+        //create output
+        char output_buffer[MAX_CHAR_SIZE];
+        output_buffer[0] = 0;
+        if(pe32plus){
+            strlcat(output_buffer, "format PE64 ", MAX_CHAR_SIZE);
+        }
+        else{
+            strlcat(output_buffer, "format PE ", MAX_CHAR_SIZE);
+        }
+
+        if(guiApp){
+            strlcat(output_buffer, "GUI ", MAX_CHAR_SIZE);
+        }
+        else{
+            strlcat(output_buffer, "console ", MAX_CHAR_SIZE);
+        }
+
+        if(pe32plus){
+            strlcat(output_buffer, "5.0 at IMAGE_BASE", MAX_CHAR_SIZE);
+        }
+        else{
+            strlcat(output_buffer, "4.0 at IMAGE_BASE", MAX_CHAR_SIZE);
+        }
+
+        //write output to file
+        char full_output_name[MAX_CHAR_SIZE];
+        full_output_name[0] = 0;
+        strlcat(full_output_name, (pe32plus ? CONTAINER64_DIR : CONTAINER32_DIR), 
+                MAX_CHAR_SIZE);
+        strlcat(full_output_name, MAIN_PROLOG_FILENAME, MAX_CHAR_SIZE);
+        if(!memToFile(full_output_name, output_buffer, strlen(output_buffer),
+                      FALSE)) {
+                fprintf(stderr, "Could not write include file %s\n",
+                        full_output_name);
+                return FALSE;
+        }
+        else{
+                verbose("%s written to %s\n", output_buffer, full_output_name);
+                return TRUE;
+        }
+}

@@ -37,10 +37,8 @@
 # - AV evasion (obfuscate sbox, strings, reduce entropy, etc.)                #
 # - Polymorphic generation of the container                                   #
 # - Add .NET Support or at least warn users                                   #
-# - Preserve Icon and GUI/Console Flag                                        #
 # - Check for correct DLL Version Numbers before Loading                      #
-# - 64 bit asm code cleanup (container and aes payload)                       #
-# - Remove macros in Asm Code                                                 #
+# - Preserve Icon                                                             #
 #                                                                             #
 # CHANGELOG:                                                                  #
 #                                                                             #
@@ -50,6 +48,7 @@
 # - basic win32 apis are part of import table and not loaded dynamically      #
 # - output size for non-log binaries reduced by 4kb                           #
 # - 32 bit is now deprecated                                                  #
+# - Preserve GUI/Console Flag                                                 #
 #                                                                             #
 # v2.2:                                                                       #
 # - removed aes.dll blob and use tinyAes c implementation instead             #

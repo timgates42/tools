@@ -94,6 +94,8 @@ int main(int argc, char *argv[]){
 
         //we need these later when we generate the asm code
         struct PEData pe_data;
+        pe_data.ImageBase32 = 0;
+        pe_data.ImageBase64 = 0;
         const char* container_directory;
 
         BOOL pe32 = isPE32(coff_header);
@@ -126,6 +128,12 @@ int main(int argc, char *argv[]){
         verbose("| Stage 2: Generating ASM files |\n");
         verbose(" -------------------------------\n");
         verbose("\n");
+
+        //generates something like: format PE console 4.0 at IMAGE_BASE
+        if(!fasmHeader(pe_data.GuiApplication, !pe32))
+        {
+                goto error;
+        }
 
         //encrypt input file and create fasm array
         if(!fasmEncryptOutput(container_directory, &open_file, key_length,

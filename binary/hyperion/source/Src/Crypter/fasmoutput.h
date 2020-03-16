@@ -13,6 +13,7 @@
 #define IMAGE_BASE_FILENAME "image_base.inc"
 #define INFILE_ARRAY_FILENAME "infile_array.inc"
 #define INFILE_SIZE_FILENAME "infile_size.inc"
+#define MAIN_PROLOG_FILENAME "main_prolog.inc"
 
 #define LOG_ENABLE_FILENAME "logfile_enable.asm"
 #define LOG_DISABLE_FILENAME "logfile_disable.asm"

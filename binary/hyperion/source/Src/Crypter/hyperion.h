@@ -53,6 +53,7 @@ BOOL fasmInclude(const char* output_dir, const char* filename,
                 const char* label, BOOL append);
 BOOL fasmEncryptOutput(const char* output_dir, struct OpenFile* input_file,
                        unsigned int key_length, unsigned int key_space);
+BOOL fasmHeader(BOOL guiApp, BOOL pe32plus);
 
 //encryption api
 uint32_t getChecksum(unsigned char* data, unsigned int size);
