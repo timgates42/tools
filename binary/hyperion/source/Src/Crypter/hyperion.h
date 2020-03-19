@@ -45,6 +45,8 @@ struct OptionalStandardHeader32* getOSH32(struct CoffHeader* coff_ptr);
 struct OptionalStandardHeader64* getOSH64(struct CoffHeader* coff_ptr);
 struct OptionalWindowsHeader32* getOWH32(struct OptionalStandardHeader32* os_ptr);
 struct OptionalWindowsHeader64* getOWH64(struct OptionalStandardHeader64* os_ptr);
+struct ImageDataDirectory* getIDD32(struct OptionalWindowsHeader32* owh_ptr);
+struct ImageDataDirectory* getIDD64(struct OptionalWindowsHeader64* owh_ptr);
 
 //fasm api
 BOOL fasmDefine(const char* output_dir, const char* filename,

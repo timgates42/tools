@@ -99,6 +99,7 @@ int main(int argc, char *argv[]){
         const char* container_directory;
 
         BOOL pe32 = isPE32(coff_header);
+        struct ImageDataDirectory* idd = NULL;
         if(pe32) {
                 verbose("Found 32 bit binary\n");
                 struct OptionalStandardHeader32* osh32 = getOSH32(coff_header);
@@ -109,6 +110,7 @@ int main(int argc, char *argv[]){
                 pe_data.SizeOfImage = owh32->SizeOfImage;
                 container_directory = CONTAINER32_DIR;
                 pe_data.GuiApplication = isGuiApplication(owh32->Subsystem);
+                idd = getIDD32(owh32);
         }
         else{
                 verbose("Found 64 bit binary\n");
@@ -120,6 +122,7 @@ int main(int argc, char *argv[]){
                 pe_data.SizeOfImage = owh64->SizeOfImage;
                 container_directory = CONTAINER64_DIR;
                 pe_data.GuiApplication = isGuiApplication(owh64->Subsystem);
+                idd = getIDD64(owh64);
         }
 
         //create decryption stub
