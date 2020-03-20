@@ -102,6 +102,7 @@ struct OptionalWindowsHeader64 {
         uint32_t NumberOfRvaAndSizes;
 };
 
+#define RESOURCE_TABLE_INDEX 2
 struct ImageDataDirectory {
         uint32_t VirtualAddress;
         uint32_t Size;

@@ -18,6 +18,12 @@ struct OptionalWindowsHeader32* getOWH32(struct OptionalStandardHeader32* os_ptr
                (((char*) os_ptr) + sizeof(struct OptionalStandardHeader32));
 }
 
+/*
+ * Retrives the DataDirectory List
+ */
 struct ImageDataDirectory* getIDD32(struct OptionalWindowsHeader32* owh_ptr){
-    return NULL;
+    struct ImageDataDirectory* ret = 
+        (struct ImageDataDirectory*) 
+        (((char*) owh_ptr) + sizeof(struct OptionalWindowsHeader32));
+    return ret;
 }

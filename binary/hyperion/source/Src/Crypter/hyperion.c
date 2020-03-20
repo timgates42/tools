@@ -99,6 +99,7 @@ int main(int argc, char *argv[]){
         const char* container_directory;
 
         BOOL pe32 = isPE32(coff_header);
+        int idd_size = 0;
         struct ImageDataDirectory* idd = NULL;
         if(pe32) {
                 verbose("Found 32 bit binary\n");
@@ -111,6 +112,7 @@ int main(int argc, char *argv[]){
                 container_directory = CONTAINER32_DIR;
                 pe_data.GuiApplication = isGuiApplication(owh32->Subsystem);
                 idd = getIDD32(owh32);
+                idd_size = owh32->NumberOfRvaAndSizes;
         }
         else{
                 verbose("Found 64 bit binary\n");
@@ -123,6 +125,7 @@ int main(int argc, char *argv[]){
                 container_directory = CONTAINER64_DIR;
                 pe_data.GuiApplication = isGuiApplication(owh64->Subsystem);
                 idd = getIDD64(owh64);
+                idd_size = owh64->NumberOfRvaAndSizes;
         }
 
         //create decryption stub
@@ -181,6 +184,12 @@ int main(int argc, char *argv[]){
                                             LOGFILE_SELECT_FILENAME,
                                             LOG_DISABLE_FILENAME, FALSE)) {
                 goto error;
+        }
+
+        if(idd_size >= RESOURCE_TABLE_INDEX){
+            verbose("Resource table address 0x%x, size %d\n",   
+                    idd[RESOURCE_TABLE_INDEX].VirtualAddress, 
+                    idd[RESOURCE_TABLE_INDEX].Size); 
         }
 
         //activate aes decryption payload
