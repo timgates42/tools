@@ -128,6 +128,18 @@ int main(int argc, char *argv[]){
                 idd_size = owh64->NumberOfRvaAndSizes;
         }
 
+        //abort if input is a .NET executable
+        if(idd_size >= CLR_RUNTIME_HEADER_INDEX){
+            uint32_t va = idd[RESOURCE_TABLE_INDEX].VirtualAddress;
+            uint32_t size= idd[RESOURCE_TABLE_INDEX].Size;
+
+            if(va != 0 && size != 0){
+                fprintf(stderr, "Aborting because input file seems to be a .NET executable\n");
+                fprintf(stderr, "See \"Encryption of .NET Executables\" on nullsecurity.net for details\n");
+                goto error;
+            }
+        }
+
         //create decryption stub
         verbose("\n");
         verbose(" -------------------------------\n");
@@ -184,12 +196,6 @@ int main(int argc, char *argv[]){
                                             LOGFILE_SELECT_FILENAME,
                                             LOG_DISABLE_FILENAME, FALSE)) {
                 goto error;
-        }
-
-        if(idd_size >= RESOURCE_TABLE_INDEX){
-            verbose("Resource table address 0x%x, size %d\n",   
-                    idd[RESOURCE_TABLE_INDEX].VirtualAddress, 
-                    idd[RESOURCE_TABLE_INDEX].Size); 
         }
 
         //activate aes decryption payload

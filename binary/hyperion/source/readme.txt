@@ -10,10 +10,10 @@
 # Hyperion: A runtime PE-Crypter                                              #
 #                                                                             #
 # VERSION                                                                     #
-# 2.3-Snapshot                                                                #
+# 2.3                                                                         #
 #                                                                             #
 # DATE                                                                        #
-# 12/11/2019                                                                  #
+# 03/21/2020                                                                  #
 #                                                                             #
 # AUTHOR                                                                      #
 # belial - http://www.phobosys.de/hyperion                                    #
@@ -33,12 +33,15 @@
 # may take a few seconds) and generates a log file for debug purpose.         #
 #                                                                             #
 # TODO                                                                        #
+# - AES payload: Maybe use Windows crypto API instead because our fasm aes    #
+#   payload is full of static tables                                          #
+# - Better crypto blob hiding/obfuscation                                     #
+# - Dynamically morph code and add junk code                                  #
 # - Support late Binding of DLLs/APIs                                         #
-# - AV evasion (obfuscate sbox, strings, reduce entropy, etc.)                #
-# - Polymorphic generation of the container                                   #
-# - Add .NET Support or at least warn users                                   #
 # - Check for correct DLL Version Numbers before Loading                      #
-# - Preserve Icon                                                             #
+# - Analysis: What else is missing in PE loader                               #
+# - Provide hyperion as free a web service to hide advanced implementation    #
+#   details                                                                   #
 #                                                                             #
 # CHANGELOG:                                                                  #
 #                                                                             #
@@ -48,7 +51,8 @@
 # - basic win32 apis are part of import table and not loaded dynamically      #
 # - output size for non-log binaries reduced by 4kb                           #
 # - 32 bit is now deprecated                                                  #
-# - Preserve GUI/Console Flag                                                 #
+# - preserve GUI/Console Flag                                                 #
+# - abort if input is a .NET executable                                       #
 #                                                                             #
 # v2.2:                                                                       #
 # - removed aes.dll blob and use tinyAes c implementation instead             #

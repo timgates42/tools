@@ -103,6 +103,7 @@ struct OptionalWindowsHeader64 {
 };
 
 #define RESOURCE_TABLE_INDEX 2
+#define CLR_RUNTIME_HEADER_INDEX 14
 struct ImageDataDirectory {
         uint32_t VirtualAddress;
         uint32_t Size;
