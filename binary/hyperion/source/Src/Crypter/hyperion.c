@@ -130,8 +130,8 @@ int main(int argc, char *argv[]){
 
         //abort if input is a .NET executable
         if(idd_size >= CLR_RUNTIME_HEADER_INDEX){
-            uint32_t va = idd[RESOURCE_TABLE_INDEX].VirtualAddress;
-            uint32_t size= idd[RESOURCE_TABLE_INDEX].Size;
+            uint32_t va = idd[CLR_RUNTIME_HEADER_INDEX].VirtualAddress;
+            uint32_t size= idd[CLR_RUNTIME_HEADER_INDEX].Size;
 
             if(va != 0 && size != 0){
                 fprintf(stderr, "Aborting because input file seems to be a .NET executable\n");
