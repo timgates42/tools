@@ -10,10 +10,10 @@
 # Hyperion: A runtime PE-Crypter                                              #
 #                                                                             #
 # VERSION                                                                     #
-# 2.3                                                                         #
+# 2.3.1                                                                       #
 #                                                                             #
 # DATE                                                                        #
-# 03/21/2020                                                                  #
+# 03/23/2020                                                                  #
 #                                                                             #
 # AUTHOR                                                                      #
 # belial - http://www.phobosys.de/hyperion                                    #
@@ -44,6 +44,9 @@
 #   details                                                                   #
 #                                                                             #
 # CHANGELOG:                                                                  #
+#                                                                             #
+# v2.3.1:                                                                     #
+# - bugfix in .net file detection                                             #
 #                                                                             #
 # v2.3:                                                                       #
 # - log message strings were still in non-log binaries -> removed             #
