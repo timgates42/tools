@@ -12,7 +12,7 @@ This code is dedicated to my friend Zeljko (R.I.P.), who passed away,
 
 # Installation
 
-[![asciicast](https://asciinema.org/a/6WjyXNbLIpTF3c2JECo74RyST.png)](https://asciinema.org/a/6WjyXNbLIpTF3c2JECo74RyST)
+[![asciicast](https://asciinema.org/a/fWFJ1JFV8obXq7aqywit8Qct9.png)](https://asciinema.org/a/fWFJ1JFV8obXq7aqywit8Qct9)
 
 # Usage
 
