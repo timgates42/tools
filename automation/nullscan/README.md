@@ -10,10 +10,6 @@ clean structure and a HTML report can subsequently be generated.
 This code is dedicated to my friend Zeljko (R.I.P.), who passed away,
 2nd Dec 2012.
 
-# Installation
-
-[![asciicast](https://asciinema.org/a/fWFJ1JFV8obXq7aqywit8Qct9.png)](https://asciinema.org/a/fWFJ1JFV8obXq7aqywit8Qct9)
-
 # Usage
 
 ```
@@ -87,6 +83,10 @@ examples
 # Example
 
 [![asciicast](https://asciinema.org/a/t9PLEWgamKH70NLrd4Pze1I6a.png)](https://asciinema.org/a/t9PLEWgamKH70NLrd4Pze1I6a)
+
+# Installation
+
+[![asciicast](https://asciinema.org/a/fWFJ1JFV8obXq7aqywit8Qct9.png)](https://asciinema.org/a/fWFJ1JFV8obXq7aqywit8Qct9)
 
 # Author
 noptrix
