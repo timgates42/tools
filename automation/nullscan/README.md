@@ -88,6 +88,12 @@ examples
 
 [![asciicast](https://asciinema.org/a/fWFJ1JFV8obXq7aqywit8Qct9.png)](https://asciinema.org/a/fWFJ1JFV8obXq7aqywit8Qct9)
 
+# Notes
+
+- Please check the manpage from docs/nullscan.1
+- Use '?' option-value for any cmdline options. It gives you information for usage and examples.
+- nullscan is already packaged and available for [BlackArch Linux](https://www.blackarch.org/)
+
 # Author
 noptrix
 
