@@ -82,7 +82,7 @@ examples
 
 # Example
 
-[![asciicast](https://asciinema.org/a/kUNVbUEIde0e6vtsKiFi5neXb.png)](https://asciinema.org/a/kUNVbUEIde0e6vtsKiFi5neXb){:target="_blank"}
+[![asciicast](https://asciinema.org/a/kUNVbUEIde0e6vtsKiFi5neXb.png)](https://asciinema.org/a/kUNVbUEIde0e6vtsKiFi5neXb)
 
 # Installation
 
