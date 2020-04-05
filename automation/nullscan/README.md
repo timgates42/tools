@@ -82,12 +82,12 @@ examples
 
 # Example
 
-[![asciicast](https://asciinema.org/a/kUNVbUEIde0e6vtsKiFi5neXb)](https://asciinema.org/a/kUNVbUEIde0e6vtsKiFi5neXb)
+[![asciicast](https://asciinema.org/a/kUNVbUEIde0e6vtsKiFi5neXb.png)](https://asciinema.org/a/kUNVbUEIde0e6vtsKiFi5neXb)
 
 # Installation
 
 Type `make` and follow instructions. Install needed python modules afterwards
-using `pip` install -r docs/requirements.txt.
+using `pip install -r docs/requirements.txt`.
 
 # Notes
 
