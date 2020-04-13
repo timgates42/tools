@@ -86,20 +86,27 @@ examples
 
 # Installation
 
-Type `make` and follow instructions. Install needed python modules afterwards
-using `pip install -r docs/requirements.txt`.
+Run `setup.sh`. Install needed python modules afterwards using `pip install -r docs/requirements.txt`.
+
+# Author
+
+noptrix
 
 # Notes
 
 - Please check the manpage from docs/nullscan.1
 - Use '?' option-value for any cmdline options. It gives you information for usage and examples.
+- clean code; real project
 - nullscan is already packaged and available for [BlackArch Linux](https://www.blackarch.org/)
+- My master-branches are always dev-branches; use releases for stable versions.
+- All of my public stuff you find are officially announced and published via [nullsecurity.net](https://www.nullsecurity.net).
 
-# Author
-noptrix
+# License
+
+Check docs/LICENSE.
 
 # Disclaimer
-We hereby emphasize, that the hacking related stuff on
-[nullsecurity.net](http://nullsecurity.net) is only for education purposes.
+We hereby emphasize, that the hacking related stuff found on
+[nullsecurity.net](http://nullsecurity.net/) are only for education purposes.
 We are not responsible for any damages. You are responsible for your own
 actions.
