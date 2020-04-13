@@ -16,3 +16,6 @@
 [submodule "scanner/httpgrep/source"]
 	path = scanner/httpgrep/source
 	url = https://github.com/noptrix/httpgrep
+[submodule "cracker/sshprank/source"]
+	path = cracker/sshprank/source
+	url = https://github.com/noptrix/sshprank
