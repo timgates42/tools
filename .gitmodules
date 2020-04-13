@@ -22,3 +22,6 @@
 [submodule "misc/ipcountry/source"]
 	path = misc/ipcountry/source
 	url = https://github.com/noptrix/ipcountry
+[submodule "scanner/dnsspider/source"]
+	path = scanner/dnsspider/source
+	url = https://github.com/noptrix/dnsspider
