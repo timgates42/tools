@@ -19,3 +19,6 @@
 [submodule "cracker/sshprank/source"]
 	path = cracker/sshprank/source
 	url = https://github.com/noptrix/sshprank
+[submodule "misc/ipcountry/source"]
+	path = misc/ipcountry/source
+	url = https://github.com/noptrix/ipcountry
