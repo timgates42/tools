@@ -6,4 +6,7 @@
 	url = https://github.com/dorneanu/netgrafio
 [submodule "scanner/smalisca/source"]
 	path = scanner/smalisca/source
-	url = https://github.com/dorneanu/smalisca
+  url = https://github.com/dorneanu/smalisca
+[submodule "scanner/lulzbuster/source"]
+	path = scanner/lulzbuster/source
+	url = https://github.com/noptrix/lulzbuster
