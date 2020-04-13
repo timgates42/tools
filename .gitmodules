@@ -13,3 +13,6 @@
 [submodule "automation/nullscan/source"]
 	path = automation/nullscan/source
 	url = https://github.com/noptrix/nullscan
+[submodule "scanner/httpgrep/source"]
+	path = scanner/httpgrep/source
+	url = https://github.com/noptrix/httpgrep
