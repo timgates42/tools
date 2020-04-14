@@ -25,3 +25,6 @@
 [submodule "scanner/dnsspider/source"]
 	path = scanner/dnsspider/source
 	url = https://github.com/noptrix/dnsspider
+[submodule "backdoor/fbkit/source"]
+	path = backdoor/fbkit/source
+	url = https://github.com/noptrix/fbkit
