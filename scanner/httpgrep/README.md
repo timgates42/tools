@@ -1,13 +1,20 @@
 # Description
 
-A python tool which scans for HTTP servers and finds given strings in URIs.
+A python tool which scans for HTTP servers and finds given strings in HTTP body
+and HTTP response headers.
 
 # Usage
 
 ```
 $ httpgrep -H
+    __    __  __
+   / /_  / /_/ /_____  ____ _________  ____
+  / __ \/ __/ __/ __ \/ __ `/ ___/ _ \/ __ \
+ / / / / /_/ /_/ /_/ / /_/ / /  /  __/ /_/ /
+/_/ /_/\__/\__/ .___/\__, /_/   \___/ .___/
+             /_/    /____/         /_/
 
---==[ httpgrep by nullsecurity.net ]==--
+     --== [ by nullsecurity.net ] ==--
 
 usage
 
@@ -23,12 +30,16 @@ opts
   -u <URI>          - URI to search given strings in, e.g.: /foobar/, /foo.html
                       (default /)
   -s <string|file>  - a single string or multile strings in a file to find in
-                      given URIs, e.g. 'tomcat 8', '/tmp/igot0daysforthese.txt'
+                      given URIs and HTTP response headers, e.g.: 'tomcat 8',
+                      '/tmp/igot0daysforthese.txt'
+  -S <where>        - search strings in given places (default: headers,body)
   -b <bytes>        - num bytes to read from response. offset == response[0].
                       (default: 64)
-  -x <threads>      - num threads for concurrent checks (default: 50)
-  -c <seconds>      - num seconds for socket timeout (default: 2.5)
+  -x <threads>      - num threads for concurrent checks (default: 80)
+  -c <seconds>      - num seconds for socket timeout (default: 2.0)
   -i                - use case-insensitive search
+  -r                - perform reverse dns lookup for given IPv4 addresses
+  -l <file>         - log urls and found strings to file
   -v                - verbose mode (default: quiet)
 
 misc
@@ -45,7 +56,7 @@ noptrix
 
 - quick'n'dirty code
 - httpgrep is already packaged and available for [BlackArch Linux](https://www.blackarch.org/)
-- My master-branches are always dev-branches; use releases for stable versions.
+- My master-branches are always stable; dev-branches are created for current work.
 - All of my public stuff you find are officially announced and published via [nullsecurity.net](https://www.nullsecurity.net).
 
 # License
