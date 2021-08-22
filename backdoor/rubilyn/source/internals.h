@@ -270,7 +270,7 @@ struct	proc {
 	gid_t		p_rgid;
 	uid_t		p_svuid;
 	gid_t		p_svgid;
-	uint64_t	p_uniqueid;		/* process uniqe ID */
+	uint64_t	p_uniqueid;		/* process unique ID */
 	struct lck_mtx_t p_mlock;		/* mutex lock for proc */
 	char		p_stat;			/* S* process status. (PL)*/
 	char		p_shutdownstate;

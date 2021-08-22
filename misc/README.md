@@ -1,5 +1,5 @@
 # About
-This section includes miscellanous files. Often, you will find non-security
+This section includes miscellaneous files. Often, you will find non-security
 related stuff here.
 
 If you find some bugs or if you have any questions, ideas or criticism regarding

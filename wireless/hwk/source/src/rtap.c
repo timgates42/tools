@@ -91,7 +91,7 @@ radiotap_parse(const uint8_t *pkt, RADIOTAP_CONTROL_t *rmanage)
     RADIOTAP_PFLAGS_t *rpflags 		= NULL;
     size_t iterator         		= sizeof(RADIOTAP_PREAMBLE_t);
     
-    rpre = (RADIOTAP_PREAMBLE_t *)pkt;            /* first parse the preable which is always the same  */
+    rpre = (RADIOTAP_PREAMBLE_t *)pkt;            /* first parse the preamble which is always the same  */
     rpflags = (RADIOTAP_PFLAGS_t *)&rpre->pflags; /* rpflags is a bitmap indicating the present fields */
     
     memcpy(&rmanage->rpre,rpre,		 sizeof(RADIOTAP_PREAMBLE_t));
@@ -184,7 +184,7 @@ radiotap_parse(const uint8_t *pkt, RADIOTAP_CONTROL_t *rmanage)
         iterator += sizeof(uint16_t);
     }
     
-    /* well, where are channel+ and exensions field?  ;) */
+    /* well, where are channel+ and extensions field?  ;) */
     
     return(0);
 }
